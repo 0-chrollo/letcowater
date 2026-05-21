@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Borehole Cost Calculator — Letco Water</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4f6f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+
+    .section { width: 100%; max-width: 560px; }
+
+    .card {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #d4ede5;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      overflow: hidden;
+    }
+
+    .card-inner { padding: 1.75rem; }
+
+    .top-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; }
+    .top-bar i { font-size: 22px; color: #1D9E75; }
+    .top-bar h2 { font-size: 19px; font-weight: 600; color: #0d1f1a; margin: 0; }
+
+    .sub { font-size: 13px; color: #6b7c75; margin: 0 0 1.5rem; line-height: 1.5; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 1.25rem;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      color: #6b7c75;
+      margin-bottom: 6px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .input-wrap { position: relative; }
+
+    .input-wrap input[type=number] {
+      width: 100%;
+      padding: 11px 42px 11px 38px;
+      font-size: 16px;
+      font-weight: 600;
+      border: 1.5px solid #c5d8d0;
+      border-radius: 8px;
+      background: #fff;
+      color: #0d1f1a;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      -moz-appearance: textfield;
+    }
+    .input-wrap input[type=number]::-webkit-inner-spin-button,
+    .input-wrap input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .input-wrap input[type=number]:focus {
+      border-color: #1D9E75;
+      box-shadow: 0 0 0 3px rgba(29,158,117,0.12);
+    }
+    .input-wrap input[type=number].error {
+      border-color: #E24B4A;
+      box-shadow: 0 0 0 3px rgba(226,75,74,0.10);
+    }
+
+    .input-icon {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 36px; display: flex; align-items: center; justify-content: center;
+      color: #9FE1CB; font-size: 14px; pointer-events: none;
+    }
+
+    .unit-badge {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 38px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #0F6E56;
+      background: #E1F5EE;
+      border-radius: 0 8px 8px 0;
+      border-left: 1.5px solid #9FE1CB;
+      pointer-events: none;
+      letter-spacing: 0.02em;
+    }
+
+    .hint { font-size: 11px; color: #6b7c75; margin-top: 5px; min-height: 16px; display: flex; align-items: center; gap: 4px; }
+    .hint i { font-size: 11px; }
+    .hint.err { color: #A32D2D; }
+
+    .rate-row { display: flex; gap: 8px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .rate-pill {
+      display: flex; align-items: center; gap: 6px;
+      padding: 5px 12px; border-radius: 999px;
+      background: #f0f7f4; border: 1px solid #d4ede5;
+      font-size: 12px; color: #4a6b60; font-weight: 500;
+    }
+    .rate-pill i { font-size: 12px; color: #1D9E75; }
+
+    .get-btn {
+      width: 100%; padding: 13px;
+      font-size: 15px; font-weight: 600;
+      background: #1D9E75; color: #fff;
+      border: none; border-radius: 8px;
+      cursor: pointer; transition: background 0.15s, transform 0.1s;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      letter-spacing: 0.01em;
+    }
+    .get-btn:hover { background: #0F6E56; }
+    .get-btn:active { transform: scale(0.98); }
+    .get-btn i { font-size: 15px; }
+
+    .result-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .result-panel.open { max-height: 400px; }
+
+    .result-divider {
+      height: 1px; background: #e8f4ef; margin: 0 1.75rem;
+      transform: scaleX(0);
+      transition: transform 0.3s 0.15s;
+      transform-origin: left;
+    }
+    .result-panel.open .result-divider { transform: scaleX(1); }
+
+    .result-inner { padding: 0 1.75rem 1.75rem; }
+    .result-rows { margin-top: 1.25rem; }
+
+    .result-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f7f4;
+      font-size: 14px;
+    }
+    .result-row:last-of-type { border-bottom: none; }
+    .result-row .rl { color: #6b7c75; display: flex; align-items: center; gap: 8px; }
+    .result-row .rl i { font-size: 14px; color: #1D9E75; width: 16px; text-align: center; }
+    .result-row .rv { font-weight: 600; color: #0d1f1a; }
+
+    .note {
+      font-size: 11px; color: #8a9e97;
+      margin-top: 1rem; line-height: 1.6;
+      display: flex; gap: 8px; align-items: flex-start;
+      padding: 10px 12px;
+      background: #f6fbf9;
+      border-radius: 8px;
+      border: 1px solid #e1f0eb;
+    }
+    .note i { font-size: 13px; color: #1D9E75; flex-shrink: 0; margin-top: 2px; }
+
+    .total-bar {
+      background: #085041;
+      margin: 1rem -1.75rem -1.75rem;
+      padding: 16px 1.75rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .total-bar .tl { font-size: 13px; color: #9FE1CB; font-weight: 500; display: flex; align-items: center; gap: 7px; }
+    .total-bar .tl i { font-size: 14px; }
+    .total-bar .tv { font-size: 24px; font-weight: 700; color: #fff; }
+  </style>
+</head>
+<body>
+
+  <section class="section">
+    <div class="card">
+      <div class="card-inner">
+
+        <div class="top-bar">
+          <i class="fa-solid fa-water" aria-hidden="true"></i>
+          <h2>Borehole cost calculator</h2>
+        </div>
+        <p class="sub">Enter your requirements below to get your drilling cost</p>
+
+        <div class="fields">
+          <div class="field">
+            <label>Drilling depth</label>
+            <div class="input-wrap">
+              <span class="input-icon"><i class="fa-solid fa-arrow-down-wide-short" aria-hidden="true"></i></span>
+              <input type="number" id="depth" min="1" max="500" placeholder="40" aria-label="Drilling depth in meters" />
+              <span class="unit-badge">m</span>
+            </div>
+            <p class="hint" id="depth-hint"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> How deep to drill</p>
+          </div>
+          <div class="field">
+            <label>Steel casing <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+            <div class="input-wrap">
+              <span class="input-icon"><i class="fa-solid fa-pipe-section" aria-hidden="true"></i></span>
+              <input type="number" id="casing" min="0" max="500" placeholder="12" aria-label="Steel casing in meters" />
+              <span class="unit-badge">m</span>
+            </div>
+            <p class="hint" id="casing-hint"><i class="fa-regular fa-circle-question" aria-hidden="true"></i> Leave blank if not needed</p>
+          </div>
+        </div>
+
+        <div class="rate-row">
+          <div class="rate-pill"><i class="fa-solid fa-gauge-simple" aria-hidden="true"></i> Drilling — R350 / m</div>
+          <div class="rate-pill"><i class="fa-solid fa-ring" aria-hidden="true"></i> Casing — R650 / m</div>
+        </div>
+
+        <button class="get-btn" id="get-btn" onclick="calculate()">
+          <i class="fa-solid fa-calculator" aria-hidden="true" id="btn-icon"></i>
+          <span id="btn-text">Get cost</span>
+        </button>
+
+        <div class="result-panel" id="result-panel">
+          <div class="result-divider"></div>
+          <div class="result-inner">
+            <div class="result-rows">
+              <div class="result-row">
+                <span class="rl"><i class="fa-solid fa-drill" aria-hidden="true"></i> Drilling cost</span>
+                <span class="rv" id="r-drill">—</span>
+              </div>
+              <div class="result-row">
+                <span class="rl"><i class="fa-solid fa-pipe-section" aria-hidden="true"></i> Casing cost</span>
+                <span class="rv" id="r-casing">—</span>
+              </div>
+            </div>
+            <div class="note">
+              <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+              Transport, pump installation, and water purification costs are not included above. Contact us on <strong>069 686 0052</strong> for a full quote.
+            </div>
+            <div class="total-bar">
+              <span class="tl"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i> Your quote</span>
+              <span class="tv" id="r-total">—</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function fmt(n) {
+      return 'R\u202F' + n.toLocaleString('en-ZA');
+    }
+
+    function calculate() {
+      const dInput = document.getElementById('depth');
+      const dHint = document.getElementById('depth-hint');
+      const depth = parseFloat(dInput.value);
+      const casing = parseFloat(document.getElementById('casing').value) || 0;
+
+      dInput.classList.remove('error');
+      dHint.classList.remove('err');
+      dHint.innerHTML = '<i class="fa-regular fa-circle-question"></i> How deep to drill';
+
+      if (!dInput.value || isNaN(depth) || depth <= 0) {
+        dInput.classList.add('error');
+        dHint.classList.add('err');
+        dHint.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Please enter a valid depth';
+        return;
+      }
+
+      document.getElementById('r-drill').textContent = fmt(Math.round(depth * 350));
+      document.getElementById('r-casing').textContent = casing > 0 ? fmt(Math.round(casing * 650)) : 'Not included';
+      document.getElementById('r-total').textContent = fmt(Math.round(depth * 350 + casing * 650));
+
+      document.getElementById('result-panel').classList.add('open');
+      document.getElementById('btn-icon').className = 'fa-solid fa-rotate-right';
+      document.getElementById('btn-text').textContent = 'Recalculate';
+      document.getElementById('get-btn').style.background = '#0F6E56';
+    }
+
+    document.getElementById('depth').addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+    document.getElementById('casing').addEventListener('keydown', e => { if (e.key === 'Enter') calculate(); });
+  </script>
+
+</body>
+</html>

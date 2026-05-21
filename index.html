@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+<title>Letco Water Solutions</title>
+</head>
+
+
+
+
+
+<body>
+
+    <nav>
+      <div class="logo">
+        <img src="letco.png" alt="Logo">
+        
+      </div>
+    
+    <p> <a href="contact.html" class="booker">Book Now </a></p>
+    
+    
+    <style>
+        .booker{
+         padding: 7px 15px;
+            background:  #1059a7;
+            color: white;
+            border: 2px solid rgba(15, 67, 163, 0.846);
+            font-size: 0.65rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            border-radius: 35px;;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+    
+    </style>
+    
+      <button class="menu-toggle" id="toggle" aria-label="Toggle menu">
+    
+        <span>Menu</span>
+        <div class="bars">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    
+    
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+       
+        <a href="contact.html">Book Now</a>
+    
+      </div>
+      
+    </nav>
+    
+    
+    
+    
+    <style>
+
+        .hero {
+            height: 620px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+    
+        .hero-video-bg {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 100%;
+            height: 177vw;
+            border: none;
+            pointer-events: none;
+            z-index: 0;
+        }
+    
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+    
+        .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* centers the top group */
+    height: 100%;
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.hero-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+}
+
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px;
+    letter-spacing: 1px;
+    margin: 0;
+    text-align: center;  /* add this */
+}
+
+.usp {
+    padding: 5px;
+    max-width: 600px;
+    line-height: 1.6;
+    text-align: center;  /* add this */
+}
+    
+
+.hero-btn {
+    position: absolute; /* pins button independently */
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 25px;
+    background:  #104e90;
+    color: white;
+    border: 2px solid rgba(160, 178, 211, 0.846);
+    font-size: 0.80rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 35px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+    
+        .hero-btn:hover {
+            background: #091549;
+        }
+    
+        @media (max-width: 768px) {
+            .hero { height: 600px; }
+            h1 { font-size: 3rem; }
+        }
+    
+    </style>
+    
+    <div class="hero">
+    
+        <!-- Video background -->
+        <iframe
+            class="hero-video-bg"
+            src="https://streamable.com/e/sc7chc?nocontrols=1&autoplay=1&muted=1&loop=1"
+            allow="autoplay; fullscreen"
+            allowfullscreen
+            scrolling="no">
+        </iframe>
+    
+        <!-- Dark overlay -->
+        <div class="hero-overlay"></div>
+    
+        <!-- Hero content -->
+        <div class="hero-content">
+            <div class="hero-top">
+                <h3>Bloemfontein's Engine Specialists</h3>
+                <p class="usp">Engine Rebuilds · Vehicle Services · Parts Supply | Power. Performance. Reliability. All Under One Roof.</p>
+            </div>
+            <a href="contact.html" class="hero-btn">Book Now</a>
+        </div>
+    
+    </div>
+
+<script src="scripts.js"></script>
+</body>
+
+</html>
