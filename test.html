@@ -4,17 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Testing Gates</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <style>
-   * { box-sizing: border-box; }
 
-   html { 
-    scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+    /* ===== FOOTER STYLES ===== */
+.footer {
+  background: linear-gradient(115deg, #e31616 0%, #910404 100%);
+  color: #fafafa;
+  padding: 3.5rem 1.25rem 1.5rem;
+}
+
+.footer-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+.footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+.footer-heading {
+  position: relative;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.6rem;
+}
+
+.footer-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  background: #ffffff;
+}
+
+.footer-heading-social {
+  margin-top: 1.75rem;
+}
+
+/* Brand */
+.footer-logo {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.footer-logo img {
+  width: 7rem;
+  height: auto;
+  display: block;
+}
+
+.footer-brand p {
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 380px;
+  margin: 0;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.footer-links a,
+.contact-item a {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.25s ease, padding-left 0.25s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  padding-left: 6px;
+}
+
+.contact-item a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* Contact */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: #f0f0f0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.contact-item i {
+  flex: 0 0 18px;
+  margin-top: 0.2rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.footer-cta {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.4rem;
+  background: #ffffff;
+  color: #b30808;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.footer-cta:hover {
+  background: #141414;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Social */
+.social-links {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e2e2e2;
+  color: #cf1919;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  background: #141414;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.social-icon i {
+  font-size: 1.2rem;
+}
+
+/* Bottom bar */
+.footer-bottom {
+  max-width: 1280px;
+  margin: 3rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  text-align: center;
+  color: #e6e6e6;
+  font-size: 0.85rem;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+/* Focus states */
+.footer a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 640px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1.6fr 1fr 1fr 1.4fr;
+    gap: 3rem;
+  }
+}
 
     </style>
 
+
+
+
+
+
+<footer class="footer">
+    <div class="footer-container">
+  
+      <!-- Company Info -->
+      <div class="footer-section footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="JBC Steel Structures home">
+          <img src="footlog.jpg" alt="JBC Steel Structures logo" width="112" height="auto" loading="lazy">
+        </a>
+  
+        <p>
+          JBC Steel Structures specializes in steel fabrication and construction for projects of every scale.
+          From agricultural sheds to warehouses, hangars, and factories, we deliver quality, precision, and reliability from design through to erection.
+        </p>
+  
+        <h3 class="footer-heading footer-heading-social">Follow Us</h3>
+        <div class="social-links">
+          <a href="PASTE_FACEBOOK_URL_HERE" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://wa.me/27798993150" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+  
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h3 class="footer-heading">Quick Links</h3>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+  
+      <!-- Services -->
+      <div class="footer-section">
+        <h3 class="footer-heading">Our Services</h3>
+        <ul class="footer-links">
+          <li><a href="services.html">Steel Fabrication</a></li>
+          <li><a href="services.html">Steel Erection</a></li>
+          <li><a href="services.html">Agricultural Sheds</a></li>
+          <li><a href="services.html">Warehouses</a></li>
+          <li><a href="services.html">Hangars</a></li>
+          <li><a href="services.html">Factories</a></li>
+        </ul>
+      </div>
+  
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h3 class="footer-heading">Contact Us</h3>
+        <ul class="contact-info">
+          <li class="contact-item">
+            <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+            <a href="https://wa.me/27798993150">079 899 3150</a>
+          </li>
+          <li class="contact-item">
+            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            <a href="mailto:jbcmetalworks1@gmail.com">jbcmetalworks1@gmail.com</a>
+          </li>
+          <li class="contact-item">
+            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+            <span>6 Van der Lith Street, Louis Trichardt, 0920</span>
+          </li>
+        </ul>
+        <a href="contact.html" class="footer-cta">Request a Quote</a>
+      </div>
+  
+    </div>
+  
+    <div class="footer-bottom">
+      <p>&copy; 2026 JBC Steel Structures. All rights reserved.</p>
+    </div>
+  </footer>
 
 
 
