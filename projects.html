@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Borehole Drilling &amp; Water Purification | Letco Water Solutions</title>
+  <meta name="description" content="Affordable borehole drilling, pump installation, solar pumping systems and home water purification. Call or WhatsApp 078 378 2121 for a quote.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@600;700&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ================= BASE ================= */
+    * { box-sizing: border-box; }
+
+    /* CHANGED: was 90px. Now leaves room for the nav and the sticky bar when you click a menu link */
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+
+    body {
+      margin: 0px auto;
+      font-family: "Roboto", Arial, sans-serif;
+      color: #1c2b22;
+      background: #ffffff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    :focus-visible { outline: 3px solid #51a6db; outline-offset: 3px; }
+
+    .wrap {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+
+
+    /* ================= NAV (sticky) ================= */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #e3e6e4;
+    }
+    .nav.is-scrolled { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12); }
+
+    .nav .wrap {
+      max-width: none;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+
+    .nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70px;
+      padding-top: 0px;
+      padding-bottom: 5px;
+    }
+
+    .logo { display: inline-flex; align-items: center; gap: 14px; }
+    .logo img {
+      display: block;
+      height: 3rem;      /* change only this number to resize the logo */
+      width: auto;       /* width follows the height, never squashed */
+      flex-shrink: 0;
+    }
+    .logo-name {
+      font-family: "Noto Serif", Georgia, serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #14532d;
+    }
+
+    /* Burger button (mobile + tablet) */
+    .menu-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      background: none;
+      border: 0;
+      color: #285db2;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .bars { display: grid; gap: 6px; width: 26px; }
+    .bars i {
+      display: block;
+      height: 3.5px;
+      background: #285db2;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .menu-btn[aria-expanded="true"] .bars i:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+    .menu-btn[aria-expanded="true"] .bars i:nth-child(2) { opacity: 0; }
+    .menu-btn[aria-expanded="true"] .bars i:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+    /* Menu: dropdown under the nav on mobile/tablet */
+    .menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: grid;
+      grid-template-rows: 0fr;
+      background: #0d4d88;
+      transition: grid-template-rows 0.3s ease;
+    }
+    .menu.is-open { grid-template-rows: 1fr; }
+    .menu ul { overflow: hidden; min-height: 0; padding: 0 20px; }
+    .menu a {
+      display: block;
+      padding: 16px 0;
+      color: #ffffff;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .menu li:last-child a { border-bottom: 0; }
+    .menu a:hover { color: rgb(209, 6, 6); }
+
+    /* ================= HERO ================= */
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: calc(30vh - 120px);
+      min-height: calc(45svh - 120px);
+      padding: 80px 0;
+      color: #ffffff;
+      background:
+        linear-gradient(180deg, rgba(10, 14, 12, 0.72) 0%, rgba(10, 14, 12, 0.55) 50%, rgba(10, 14, 12, 0.85) 100%),
+        url("after1.webp") center / cover no-repeat,
+        #1e2224;
+    }
+
+
+
+    .hero-text {
+      max-width: 520px;
+      margin: 0 0 36px;
+      font-size: clamp(1.2rem, 2.5vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.948);
+    }
+
+    /* Buttons: each one is only as wide as its own content */
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      width: auto;
+      padding: 13px 33px;
+      border: 2px solid #51a6db8c;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .btn-main {
+      background: linear-gradient(180deg, rgb(13, 60, 141) 0%, rgba(7, 98, 147, 0.917) 50%);
+      color: #ffffff;
+    }
+    .btn-main:hover { background: #0d4d88; border-color: #51a6db; }
+    .btn-ghost { background: transparent; color: #ffffff; border-color: #ffffff; }
+    .btn-ghost:hover { background: #ffffff; color: #0d3c8d; }
+
+    /* Bordered icon inside the button */
+    .btn-icon {
+      display: grid;
+      place-items: center;
+      background-color: rgb(190, 10, 10);
+      width: 30px;
+      height: 30px;
+      transform: rotate(-40deg);
+      border: 1.5px solid currentColor;
+      border-radius: 50%;
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+    .btn-main:hover .btn-icon { transform: translateX(3px); }
+
+    /* ================= NEW: "ALL OF LETCO SOLUTIONS" BAR =================
+       Sits under the hero. When you scroll, it meets the nav and stays fixed under it.
+       Scroll back up and it returns to its place under the hero. */
+    .all {
+      position: sticky;
+      top: 71px;                 /* fallback nav height on mobile. The small script at the bottom sets the exact value */
+      z-index: 90;               /* under the nav (100), so the mobile menu opens over this bar */
+      background: #0d4d88;       /* bar colour */
+      color: #ffffff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .all summary { display: block; list-style: none; cursor: pointer; }
+    .all summary::-webkit-details-marker { display: none; }
+
+    .all-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 52px;          /* bar height */
+      font-size: 1.05rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* Round red icon, same style as your Get a Quote button icon */
+    .all-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgb(190, 10, 10);
+      color: #ffffff;
+      font-size: 0.8rem;
+    }
+    .all .icon-up { display: none; }                   /* up icon hidden when closed */
+    .all[open] .icon-up { display: grid; }             /* up icon when open */
+    .all[open] .icon-down { display: none; }           /* down icon hidden when open */
+
+    /* The opened panel */
+    .all-panel {
+      background: #ffffff;
+      color: #1c2b22;
+      border-bottom: 3px solid #0d4d88;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+      max-height: calc(100vh - 150px);   /* long content scrolls inside the panel on small screens */
+      overflow-y: auto;
+    }
+    .all-grid {
+      display: grid;
+      grid-template-columns: 1fr;        /* 1 column on mobile */
+      gap: 10px;                         /* space between the 2 paragraphs */
+      padding-top: 16px;                 /* space inside the panel, top */
+      padding-bottom: 18px;              /* space inside the panel, bottom */
+      text-align: left;
+    }
+    .all-grid p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: #4a5a6d; }
+    .all-grid strong { color: #0d4d88; }
+    .all-stop { font-size: 28px; font-weight: 700; line-height: 0; color: #d62828; }   /* red full stop */
+
+    @media (min-width: 700px) {
+      .all-grid { grid-template-columns: 1fr 1fr; gap: 40px; }   /* the 2 paragraphs side by side */
+    }
+
+    /* ================= SMALL PHONES ================= */
+    @media (max-width: 480px) {
+
+      .hero { padding: 64px 0; }
+   
+   
+      .actions { flex-direction: column; align-items: flex-start; }
+      .btn { padding: 13px 32px; }
+    }
+    @media (max-width: 400px) {
+      .logo-name { display: none; }
+    }
+
+    /* ================= DESKTOP (992px and up) ================= */
+    @media (min-width: 992px) {
+  
+      .wrap { padding-left: 40px; padding-right: 40px; }
+
+      /* Top bar in one row */
+      .top-row {
+        flex-direction: row;
+        justify-content: center;
+        gap: 16px;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      /* Nav: logo left, links right, burger hidden */
+      .nav-row { min-height: 50px; }
+      .menu-btn { display: none; }
+
+      .menu {
+        position: static;
+        display: block;
+        background: none;
+        transition: none;
+      }
+      .menu ul {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+        padding: 0;
+        overflow: visible;
+      }
+      .menu a {
+        position: relative;
+        padding: 8px 0;
+        border: 0;
+        color: #1c2b22;
+        font-size: 0.85rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 4px;
+        background: #1461a5d7;
+        transition: width 0.25s;
+      }
+      .menu a:hover { color: #0d4d88; }
+      .menu a:hover::after { width: 100%; }
+
+      /* Hero: text on the left, photo visible on the right */
+      .hero {
+        min-height: calc(100vh - 150px);
+        background:
+          linear-gradient(90deg, rgba(10, 14, 12, 0.9) 0%, rgba(10, 14, 12, 0.62) 50%, rgba(10, 14, 12, 0.2) 100%),
+          url("after1.webp") center / cover no-repeat,
+          #1e2224;
+      }
+      .hero h1 { max-width: 15ch; font-size: 3.25rem; }
+      .hero-text { max-width: 580px; font-size: 1.50rem; }
+      .btn { padding: 13px 42px; }
+
+      /* NEW: fallback nav height on desktop for the sticky bar */
+      .all { top: 54px; }
+    }
+
+    /* Tighter right padding on the button that holds the icon (keep after the media queries) */
+    .btn-main { padding-right: 14px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+
+
+  <!-- NAV: stays fixed at the top while scrolling -->
+  <header class="nav" id="nav">
+    <div class="wrap nav-row">
+      <a href="/" class="logo" aria-label="Home">
+        <img src="letcowater-logo.png" alt="Letco Water Solutions logo">
+        <span class="logo-name"></span>
+      </a>
+
+      <nav class="menu" id="menu" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="projects.html">Our Work</a></li>
+          <li><a href="#serviceAreas">Service Areas</a></li>
+          <li><a href="contact.html">Get A Quote</a></li>
+        </ul>
+      </nav>
+
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu">
+        <span>Menu</span>
+        <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="wrap">
+        <p class="hero-text">
+          From borehole drilling and pump installation to solar pumping and home water
+          purification, we find the right water solution for your home, farm or business.
+        </p>
+        <div class="actions">
+          <a href="contact.html" class="btn btn-main">
+            Get a Quote
+            <span class="btn-icon"><i class="fa-solid fa-arrow-right"></i></span>
+          </a>
+      
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- NEW: ALL OF LETCO SOLUTIONS (sticky accordion under the hero).
+       It sits directly inside <body>, so it can stay under the nav for the whole page. -->
+    <details class="all" id="allBar">
+      <summary>
+        <span class="wrap all-head">
+          <span>All of Letco Solutions</span>
+          <i class="fa-solid fa-chevron-down all-icon icon-down" aria-hidden="true"></i>
+          <i class="fa-solid fa-chevron-up all-icon icon-up" aria-hidden="true"></i>
+        </span>
+      </summary>
+
+      <div class="all-panel">
+        <div class="wrap all-grid">
+
+          <p><strong>What we do:</strong> borehole drilling, 3D geological assessment, pump supply and installation, solar pumping, backup water systems, water storage and plumbing, irrigation and home water purification<span class="all-stop">.</span></p>
+
+          <p><strong>Where we work:</strong> Gauteng, North West and Mpumalanga, including Moloto, KwaNdebele, Witbank and surrounding areas<span class="all-stop">.</span></p>
+
+        </div>
+      </div>
+    </details>
+
+  <!-- IMPORTANT: put all your other sections here, after the bar, directly inside <body>.
+       The bar stays fixed as long as it and the sections after it share the same parent. -->
+
+
+  <!-- NEW: keeps the bar exactly under the nav, whatever height the nav is -->
+  <script>
+    (function () {
+      var nav = document.getElementById("nav");
+      var bar = document.getElementById("allBar");
+      function setTop() { bar.style.top = nav.offsetHeight + "px"; }
+      setTop();
+      window.addEventListener("resize", setTop);
+      window.addEventListener("load", setTop);
+    })();
+  </script>
+
+
+
+
+
+
+</body>
+</html>
