@@ -867,7 +867,6 @@
 
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -953,6 +952,25 @@
     color: #1f2d3d;
   }
   .af-map .legend-title { font-weight: bold; font-size: 17px; margin-bottom: 3px; }
+
+  /* Legend open and close button */
+  .af-map .legend-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: 0;
+    font-family: inherit;
+    color: #0b2a6b;
+    cursor: pointer;
+  }
+  .af-map .legend-toggle i { font-size: 14px; color: #d62828; }   /* chevron and X icon */
+  .af-map .legend-body { margin-top: 6px; }
+  .af-map .legend.is-closed .legend-body { display: none; }       /* hides the list when closed */
   .af-map .dot {
     display: inline-block;
     width: 14px;
@@ -974,8 +992,8 @@
   }
 
   .af-areas {
-    background: #054e7e;           /* Service Areas bar colour */
-    color: #efeff1;
+    background: #eaf4fb;            /* Service Areas bar colour */
+    color: #0b2a6b;
   }
 
   .af-areas summary {
@@ -999,11 +1017,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #b61d1d; 
-    border: 2px solid #ffffff;      /* circle border colour */
+    border: 2px solid #0b2a6b;      /* circle border colour */
     border-radius: 50%;             /* makes it round */
     font-size: 15px;                /* icon size */
-    color: #ffffff;                 /* icon colour */
+    color: #d62828;                 /* icon colour */
     transition: transform 0.25s, background 0.25s, color 0.25s;
   }
   .af-areas[open] summary::after { transform: rotate(90deg); background: #0b2a6b; color: #ffffff; }
@@ -1012,7 +1029,7 @@
     padding: 0 18px 18px;
     font-size: 15px;
     line-height: 1.7;
-    color: #e4e4e4;
+    color: #3d4d63;
   }
 
   /* ==========================================================
@@ -1162,7 +1179,7 @@
   var isTouch = L.Browser.mobile || ("ontouchstart" in window);
 
   var map = L.map("letco-map", {
-    zoomSnap: 1.45,            // allows fine zoom levels so the fit is tighter
+    zoomSnap: 0.25,            // allows fine zoom levels so the fit is tighter
     zoomControl: false,        // hides the +/- buttons
     scrollWheelZoom: false,    // mouse wheel scrolls the page, not the map
     doubleClickZoom: false,
@@ -1219,15 +1236,34 @@
   // 0.12 = 12% of the map height. Increase it to move the pins higher, lower it to move them down.
   map.panBy([0, Math.round(map.getSize().y * 0.12)], { animate: false });
 
+  var legendStartsOpen = false;   // false = legend starts closed, true = starts open
+
   var legend = L.control({ position: "bottomright" });
   legend.onAdd = function () {
     var div = L.DomUtil.create("div", "legend");
-    var html = '<div class="legend-title">Service areas</div>';
+    var html = '<button type="button" class="legend-title legend-toggle" aria-expanded="false">' +
+               'Service areas <i class="fa-solid fa-chevron-up"></i></button>';
+    html += '<div class="legend-body">';
     Object.keys(colors).forEach(function (name) {
       html += '<div><span class="dot" style="background:' + colors[name] + '"></span>' + name + '</div>';
     });
     html += '<div><span class="ring"></span>Surrounding areas</div>';
+    html += '</div>';
     div.innerHTML = html;
+
+    L.DomEvent.disableClickPropagation(div);   // clicking the legend does not click the map
+
+    var btn = div.querySelector(".legend-toggle");
+    var icon = btn.querySelector("i");
+    function setOpen(open) {
+      div.classList.toggle("is-closed", !open);
+      btn.setAttribute("aria-expanded", open);
+      icon.className = open ? "fa-solid fa-xmark" : "fa-solid fa-chevron-up";   // X when open, chevron when closed
+    }
+    btn.addEventListener("click", function () {
+      setOpen(div.classList.contains("is-closed"));
+    });
+    setOpen(legendStartsOpen);
     return div;
   };
   legend.addTo(map);
@@ -1238,10 +1274,6 @@
 
 </body>
 </html>
-
-
-
-
 
 
 
