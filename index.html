@@ -836,6 +836,413 @@
 </section>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+
+  /* ==========================================================
+     1. SECTION AND COLUMNS (edit here)
+     ========================================================== */
+  .af {
+    background: #ffffff;            /* section colour */
+    color: #1f2d3d;
+    padding: 70px 20px;             /* space above and below */
+  }
+
+  .af-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 equal columns on desktop */
+    gap: 70px;                      /* space between the columns */
+    align-items: start;
+    text-align: left;
+  }
+
+  /* ==========================================================
+     2. COLUMN TITLES (edit here)
+     ========================================================== */
+  .af-title {
+    font-family: "Montserrat", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 44px;                /* title size */
+    line-height: 1.15;
+    color: #0b2a6b;                 /* title colour */
+    margin-bottom: 22px;
+  }
+  .af-title span { color: #d62828; }   /* red key word in the title */
+
+  .af-desc {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #4a5a6d;                 /* description colour */
+    max-width: 520px;
+    margin-bottom: 28px;
+  }
+
+  /* Bigger red full stop at the end of every paragraph */
+  .af-stop { font-size: 30px; font-weight: 700; line-height: 0; color: #d62828; }
+
+  /* ==========================================================
+     3. AREAS COLUMN: MAP AND SERVICE AREAS BAR (edit here)
+     ========================================================== */
+  .af-map {
+    display: block;
+    width: 100%;
+    height: 360px;                  /* map height on desktop */
+    border: 0;
+    background: #dbe9f6;
+  }
+
+  /* Map pins, popups and legend (used by the Leaflet map) */
+  .af-map { position: relative; z-index: 0; }   /* keeps the map under menus and popups of your page */
+  .af-map .pin { background: none; border: none; }
+  .af-map .pin svg { filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4)); }
+  .af-map .popup-title { font-weight: bold; font-size: 15px; color: #0f172a; }
+  .af-map .popup-sub { color: #475569; font-size: 13px; }
+  .af-map .legend {
+    background: #ffffff;
+    padding: 11px 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.28);
+    font-size: 15px;
+    line-height: 1.8;
+    color: #1f2d3d;
+  }
+  .af-map .legend-title { font-weight: bold; font-size: 17px; margin-bottom: 3px; }
+  .af-map .dot {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .af-map .ring {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    border: 2px solid #16a34a;
+    background: rgba(22, 163, 74, 0.2);
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  .af-areas {
+    background: #eaf4fb;            /* Service Areas bar colour */
+    color: #0b2a6b;
+  }
+
+  .af-areas summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 18px;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+  }
+  .af-areas summary::-webkit-details-marker { display: none; }
+  .af-areas summary::after {        /* the arrow */
+    content: "\2192";
+    font-size: 22px;
+    color: #d62828;
+    transition: transform 0.25s;
+  }
+  .af-areas[open] summary::after { transform: rotate(90deg); }
+
+  .af-areas p {
+    padding: 0 18px 18px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #3d4d63;
+  }
+
+  /* ==========================================================
+     4. FAQS COLUMN (edit here)
+     ========================================================== */
+  .af-faqs { border-top: 2px solid #0b2a6b; }          /* top line colour */
+  .af-faq { border-bottom: 1px solid #29a3e0; }        /* divider line colour */
+
+  .af-faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 26px 0;
+    font-family: "Montserrat", Arial, sans-serif;
+    font-weight: 600;
+    font-size: 22px;                /* question size */
+    line-height: 1.3;
+    color: #6b7f9e;                 /* closed question colour */
+    transition: color 0.2s;
+  }
+  .af-faq summary::-webkit-details-marker { display: none; }
+  .af-faq summary:hover { color: #0b2a6b; }
+  .af-faq[open] summary { color: #0b2a6b; }            /* open question colour */
+  .af-faq summary .red { color: #d62828; }             /* red key word in each question */
+
+  .af-faq summary::after {          /* plus icon, turns into an X when open */
+    content: "";
+    flex: 0 0 24px;
+    height: 24px;
+    background:
+      linear-gradient(#0b2a6b, #0b2a6b) center / 100% 2px no-repeat,
+      linear-gradient(#0b2a6b, #0b2a6b) center / 2px 100% no-repeat;
+    transition: transform 0.25s;
+  }
+  .af-faq[open] summary::after { transform: rotate(45deg); }
+
+  .af-faq p {
+    font-size: 16px;                /* answer size */
+    line-height: 1.7;
+    color: #4a5a6d;                 /* answer colour */
+    max-width: 560px;
+    padding-bottom: 28px;
+  }
+
+  /* ==========================================================
+     5. SCREEN SIZES (edit here)
+     ========================================================== */
+  @media (max-width: 900px) {       /* tablet and mobile: columns stack */
+    .af-inner { grid-template-columns: 1fr; gap: 50px; }
+    .af-title { font-size: 36px; }
+  }
+
+  @media (max-width: 560px) {       /* small phones */
+    .af { padding: 46px 16px; }
+    .af-title { font-size: 30px; }
+    .af-map { height: 300px; }
+    .af-map .legend { font-size: 12px; padding: 8px 12px; }
+    .af-map .legend-title { font-size: 14px; }
+    .af-faq summary { font-size: 18px; padding: 20px 0; }
+  }
+</style>
+
+
+<section class="af" id="areas-faqs">
+  <div class="af-inner">
+
+    <!-- LEFT COLUMN: AREAS -->
+    <div class="af-col">
+      <h2 class="af-title">Letco Solutions Service <span>Areas</span></h2>
+      <p class="af-desc">These are all the areas that Letco serves. Open the list under the map to see them<span class="af-stop">.</span></p>
+
+      <!-- The map is drawn here by the script at the bottom of the page -->
+      <div class="af-map" id="letco-map"></div>
+
+      <details class="af-areas">
+        <summary>Service Areas</summary>
+        <p>We serve clients across Gauteng, North West and Mpumalanga, including Moloto, KwaNdebele, Witbank and surrounding areas<span class="af-stop">.</span></p>
+      </details>
+    </div>
+
+    <!-- RIGHT COLUMN: FAQS -->
+    <div class="af-col">
+      <h2 class="af-title">Letco Solutions Borehole <span>FAQs</span></h2>
+
+      <div class="af-faqs">
+
+        <details class="af-faq" name="faq" open>
+          <summary><span>How much does borehole drilling <span class="red">cost</span>?</span></summary>
+          <p>Every site and every geological formation is different, so the cost depends on your property. Call or WhatsApp us on 078 378 2121 to request a quote<span class="af-stop">.</span></p>
+        </details>
+
+        <details class="af-faq" name="faq">
+          <summary><span>Can you drill where <span class="red">space</span> is limited?</span></summary>
+          <p>Yes. For sites with limited space, a small rig is available for tight access<span class="af-stop">.</span></p>
+        </details>
+
+        <details class="af-faq" name="faq">
+          <summary><span>What is <span class="red">included</span> in a borehole pump package?</span></summary>
+          <p>Each pump package is complete. It includes a pump, motor, control box, cable, rope, base plate and two adaptors<span class="af-stop">.</span></p>
+        </details>
+
+        <details class="af-faq" name="faq">
+          <summary><span>Do you install home water <span class="red">purification</span>?</span></summary>
+          <p>Yes. We install home water purification systems designed to provide clean and safe drinking water, remove impurities and germs, and improve taste and odour<span class="af-stop">.</span></p>
+        </details>
+
+        <details class="af-faq" name="faq">
+          <summary><span>Which <span class="red">areas</span> do you work in?</span></summary>
+          <p>We serve clients across Gauteng, North West and Mpumalanga, including Moloto, KwaNdebele, Witbank and surrounding areas<span class="af-stop">.</span></p>
+        </details>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  var colors = {
+    "Gauteng": "#e11d48",
+    "North West": "#2563eb",
+    "Mpumalanga": "#16a34a"
+  };
+
+  // To add a town: copy a line, change the name, province and lat/lng.
+  // radius (in metres) draws a soft coverage circle for "surrounding areas"
+  var places = [
+    { town: "Johannesburg",            province: "Gauteng",    lat: -26.2041, lng: 28.0473 },
+    { town: "Pretoria",                province: "Gauteng",    lat: -25.7479, lng: 28.2293 },
+    { town: "Rustenburg",              province: "North West", lat: -25.6676, lng: 27.2421 },
+    { town: "Mahikeng",                province: "North West", lat: -25.8652, lng: 25.6443 },
+    { town: "Witbank (eMalahleni)",    province: "Mpumalanga", lat: -25.8713, lng: 29.2332, radius: 20000 },
+    { town: "KwaNdebele (KwaMhlanga)", province: "Mpumalanga", lat: -25.4167, lng: 28.7167, radius: 20000 },
+    { town: "Moloto",                  province: "Mpumalanga", lat: -25.2833, lng: 28.7333, radius: 15000 }
+  ];
+
+  // Phones and tablets: one finger scrolls the page, the map never traps it
+  var isTouch = L.Browser.mobile || ("ontouchstart" in window);
+
+  var map = L.map("letco-map", {
+    zoomSnap: 0.25,            // allows fine zoom levels so the fit is tighter
+    zoomControl: false,        // hides the +/- buttons
+    scrollWheelZoom: false,    // mouse wheel scrolls the page, not the map
+    doubleClickZoom: false,
+    touchZoom: false,
+    boxZoom: false,
+    keyboard: false,
+    dragging: !isTouch         // desktop can still drag; touch devices cannot
+  }).setView([-26, 27.5], 7);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    attribution: "&copy; OpenStreetMap contributors"
+  }).addTo(map);
+
+  function makeIcon(color) {
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="42" viewBox="0 0 24 32">' +
+      '<path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20C24 5.4 18.6 0 12 0z" fill="' + color + '"/>' +
+      '<circle cx="12" cy="12" r="4.5" fill="#ffffff"/></svg>';
+    return L.divIcon({
+      className: "pin",
+      html: svg,
+      iconSize: [32, 42],
+      iconAnchor: [16, 42],
+      popupAnchor: [0, -38]
+    });
+  }
+
+  var bounds = [];
+  places.forEach(function (p) {
+    var color = colors[p.province];
+    L.marker([p.lat, p.lng], { icon: makeIcon(color), title: p.town })
+      .addTo(map)
+      .bindPopup(
+        '<div class="popup-title">' + p.town + '</div>' +
+        '<div class="popup-sub">' + p.province + '</div>'
+      );
+    if (p.radius) {
+      L.circle([p.lat, p.lng], {
+        radius: p.radius, color: color, weight: 1, fillColor: color, fillOpacity: 0.15
+      }).addTo(map);
+    }
+    bounds.push([p.lat, p.lng]);
+  });
+
+  // Smaller padding = tighter, more zoomed-in view. Top padding keeps the pin tops visible.
+  map.fitBounds(bounds, { paddingTopLeft: [20, 60], paddingBottomRight: [20, 20] });
+  // Shift the view up so the legend does not cover Johannesburg.
+  // 0.12 = 12% of the map height. Increase it to move the pins higher, lower it to move them down.
+  map.panBy([0, Math.round(map.getSize().y * 0.12)], { animate: false });
+
+  var legend = L.control({ position: "bottomright" });
+  legend.onAdd = function () {
+    var div = L.DomUtil.create("div", "legend");
+    var html = '<div class="legend-title">Service areas</div>';
+    Object.keys(colors).forEach(function (name) {
+      html += '<div><span class="dot" style="background:' + colors[name] + '"></span>' + name + '</div>';
+    });
+    html += '<div><span class="ring"></span>Surrounding areas</div>';
+    div.innerHTML = html;
+    return div;
+  };
+  legend.addTo(map);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
