@@ -865,8 +865,23 @@
 
 
 
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letco Solutions | Areas and FAQs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; }
 
   /* ==========================================================
      1. SECTION AND COLUMNS (edit here)
@@ -959,8 +974,8 @@
   }
 
   .af-areas {
-    background: #eaf4fb;            /* Service Areas bar colour */
-    color: #0b2a6b;
+    background: #054e7e;           /* Service Areas bar colour */
+    color: #efeff1;
   }
 
   .af-areas summary {
@@ -975,19 +990,29 @@
     font-size: 17px;
   }
   .af-areas summary::-webkit-details-marker { display: none; }
-  .af-areas summary::after {        /* the arrow */
-    content: "\2192";
-    font-size: 22px;
-    color: #d62828;
-    transition: transform 0.25s;
+  .af-areas summary::after {        /* Font Awesome icon in a round border */
+    content: "\f061";               /* icon code. Other options: \f078 chevron-down, \f107 angle-down, \f054 chevron-right */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    flex: 0 0 38px;
+    height: 38px;                   /* circle size (width above, height here) */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b61d1d; 
+    border: 2px solid #ffffff;      /* circle border colour */
+    border-radius: 50%;             /* makes it round */
+    font-size: 15px;                /* icon size */
+    color: #ffffff;                 /* icon colour */
+    transition: transform 0.25s, background 0.25s, color 0.25s;
   }
-  .af-areas[open] summary::after { transform: rotate(90deg); }
+  .af-areas[open] summary::after { transform: rotate(90deg); background: #0b2a6b; color: #ffffff; }
 
   .af-areas p {
     padding: 0 18px 18px;
     font-size: 15px;
     line-height: 1.7;
-    color: #3d4d63;
+    color: #e4e4e4;
   }
 
   /* ==========================================================
@@ -1016,13 +1041,17 @@
   .af-faq[open] summary { color: #0b2a6b; }            /* open question colour */
   .af-faq summary .red { color: #d62828; }             /* red key word in each question */
 
-  .af-faq summary::after {          /* plus icon, turns into an X when open */
-    content: "";
+  .af-faq summary::after {          /* Font Awesome plus icon, turns into an X when open */
+    content: "\2b";                 /* icon code. Other options: \f055 circle-plus, \f067 plus (bold) */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
     flex: 0 0 24px;
     height: 24px;
-    background:
-      linear-gradient(#0b2a6b, #0b2a6b) center / 100% 2px no-repeat,
-      linear-gradient(#0b2a6b, #0b2a6b) center / 2px 100% no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;                /* icon size */
+    color: #0b2a6b;                 /* icon colour */
     transition: transform 0.25s;
   }
   .af-faq[open] summary::after { transform: rotate(45deg); }
@@ -1052,7 +1081,8 @@
     .af-faq summary { font-size: 18px; padding: 20px 0; }
   }
 </style>
-
+</head>
+<body>
 
 <section class="af" id="areas-faqs">
   <div class="af-inner">
@@ -1132,7 +1162,7 @@
   var isTouch = L.Browser.mobile || ("ontouchstart" in window);
 
   var map = L.map("letco-map", {
-    zoomSnap: 0.25,            // allows fine zoom levels so the fit is tighter
+    zoomSnap: 1.45,            // allows fine zoom levels so the fit is tighter
     zoomControl: false,        // hides the +/- buttons
     scrollWheelZoom: false,    // mouse wheel scrolls the page, not the map
     doubleClickZoom: false,
@@ -1162,14 +1192,17 @@
   }
 
   var bounds = [];
+  var openMarker;                          // the pin that starts opened
   places.forEach(function (p) {
     var color = colors[p.province];
-    L.marker([p.lat, p.lng], { icon: makeIcon(color), title: p.town })
+    var marker = L.marker([p.lat, p.lng], { icon: makeIcon(color), title: p.town })
       .addTo(map)
       .bindPopup(
         '<div class="popup-title">' + p.town + '</div>' +
-        '<div class="popup-sub">' + p.province + '</div>'
+        '<div class="popup-sub">' + p.province + '</div>',
+        { autoPan: false }                 // stops the map from jumping when a popup opens
       );
+    if (p.town === "Johannesburg") openMarker = marker;   // change the town name here to start on another pin
     if (p.radius) {
       L.circle([p.lat, p.lng], {
         radius: p.radius, color: color, weight: 1, fillColor: color, fillOpacity: 0.15
@@ -1180,6 +1213,8 @@
 
   // Smaller padding = tighter, more zoomed-in view. Top padding keeps the pin tops visible.
   map.fitBounds(bounds, { paddingTopLeft: [20, 60], paddingBottomRight: [20, 20] });
+  // Zoom out for a wider view. 1.25 = one and a quarter zoom levels. Raise it to zoom out more, lower it to zoom in.
+  map.setZoom(map.getZoom() - 1.25, { animate: false });
   // Shift the view up so the legend does not cover Johannesburg.
   // 0.12 = 12% of the map height. Increase it to move the pins higher, lower it to move them down.
   map.panBy([0, Math.round(map.getSize().y * 0.12)], { animate: false });
@@ -1196,12 +1231,13 @@
     return div;
   };
   legend.addTo(map);
+
+  // Leave Johannesburg (Gauteng) opened when the page loads
+  if (openMarker) openMarker.openPopup();
 </script>
 
-
-
-
-
+</body>
+</html>
 
 
 
