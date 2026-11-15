@@ -406,6 +406,476 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+<style>
+        
+    .whole{
+       background: #ffffff;
+    }
+               .contact {
+                  
+                   display: flex;
+                   justify-content: center;
+                   align-items: center;
+                   min-height: 60vh;
+                   padding: 20px;
+               }
+       
+               .contact-container {
+                   display: flex;
+                   max-width: 1100px;
+                   width: 100%;
+                   background: white;
+                   border-radius: 2px;
+                   overflow: hidden;
+                   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+               }
+       
+               .contact-info {
+                   background:linear-gradient(180deg, rgb(8, 56, 105) 0%, rgba(5, 61, 90, 0.917) 50%);
+                   color: white;
+                   padding: 50px 40px;
+                   flex: 1;
+                   min-width: 280px;
+               }
+       
+               .contact-info h2 {
+                   color: #14a2e3;
+                   font-size: 28px;
+                   margin-bottom: 15px;
+                   font-weight: 500;
+               }
+       
+               .contact-info p {
+                   color: rgb(235, 235, 235);
+                   font-size: 14px;
+                   line-height: 1.6;
+                   margin-bottom: 40px;
+                   opacity: 0.95;
+               }
+       
+               .info-item {
+                   display: flex;
+                   align-items: flex-start;
+                   margin-bottom: 30px;
+               }
+       
+               .info-icon {
+                   width: 40px;
+                   height: 40px;
+                   background: #bf0808;
+                   border-radius: 50%;
+                   display: flex;
+                   align-items: center;
+                   justify-content: center;
+                   margin-right: 20px;
+                   flex-shrink: 0;
+               }
+       
+               .info-icon svg {
+                   width: 20px;
+                   height: 20px;
+                   fill: white;
+               }
+       
+               .info-content {
+                   flex: 1;
+               }
+       
+               .info-label {
+                   font-weight: 600;
+                   margin-bottom: 5px;
+                   font-size: 15px;
+               }
+       
+               .info-text {
+                   font-size: 14px;
+                   opacity: 0.95;
+                   line-height: 1.5;
+               }
+       
+               .contact-form {
+                   padding: 50px 40px;
+                   flex: 1.5;
+               }
+       
+               .contact-form h2 {
+                   font-size: 28px;
+                   margin-bottom: 30px;
+                   color: #333;
+                   font-weight: 500;
+               }
+       
+               .form-row {
+                   display: flex;
+                   gap: 20px;
+                   margin-bottom: 20px;
+               }
+       
+               .form-group {
+                   flex: 1;
+                   margin-bottom: 20px;
+               }
+       
+               .form-group label {
+                   display: block;
+                   font-size: 12px;
+                   font-weight: 600;
+                   color: #333;
+                   margin-bottom: 8px;
+                   text-transform: uppercase;
+                   letter-spacing: 0.5px;
+               }
+       
+               .form-group input,
+               .form-group textarea,
+               .form-group select {
+                   width: 100%;
+                   padding: 12px 15px;
+                   border: 1px solid #e0e0e0;
+                   border-radius: 4px;
+                   font-size: 14px;
+                   font-family: inherit;
+                   transition: border-color 0.3s;
+                   background: #fafafa;
+               }
+       
+               .form-group select {
+                   cursor: pointer;
+                   appearance: none;
+                   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+                   background-repeat: no-repeat;
+                   background-position: right 15px center;
+                   padding-right: 40px;
+               }
+       
+               .form-group input:focus,
+               .form-group textarea:focus,
+               .form-group select:focus {
+                   outline: none;
+                   border-color: #5ecea1;
+                   background: white;
+               }
+       
+               .form-group input::placeholder,
+               .form-group textarea::placeholder {
+                   color: #bbb;
+               }
+       
+               .form-group textarea {
+                   resize: vertical;
+                   min-height: 120px;
+               }
+       
+               .submit-btn {
+                   background:rgba(11, 114, 166, 0.917) ;
+                   color: rgb(255, 255, 255);
+                
+                   padding: 10px 20px;
+                   font-size: 15px;
+                   border-radius: 25px;
+                   cursor: pointer;
+                   transition: transform 0.2s, box-shadow 0.2s;
+                   font-weight: 700;
+               }
+       
+               .submit-btn:hover {
+                   transform: translateY(-2px);
+                   box-shadow: 0 4px 12px rgba(94, 206, 161, 0.4);
+               }
+       
+               .submit-btn:active {
+                   transform: translateY(0);
+               }
+       
+               @media (max-width: 768px) {
+                   .contact-container {
+                       flex-direction: column;
+                   }
+       
+                   .contact-info,
+                   .contact-form {
+                       padding: 30px 25px; 
+                   }
+       
+                   .form-row {
+                       flex-direction: column;
+                       gap: 0;
+                   }
+       
+                   .contact-info h2,
+                   .contact-form h2 {
+                       font-size: 24px;
+                   }
+               }
+           </style>
+   
+           
+   <section class="whole">
+
+
+    <div class="contact">
+        <div class="contact-container">
+            
+            <!-- CONTACT INFO PANEL -->
+            <div class="contact-info">
+                <h2>Get in touch</h2>
+                <p>Contact us about thatching, lapas, timber decking, painting or roof conversions, or any general enquiry about our services.</p>
+    
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Location:</div>
+                        <div class="info-text">Serving gauteng</div>
+                    </div>
+                </div>
+    
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Phone:</div>
+                        <div class="info-text">072 615 5868</div>
+                    </div>
+                </div>
+    
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">WhatsApp:</div>
+                        <div class="info-text">072 615 5868</div>
+                    </div>         
+                </div>
+    
+                <div class="info-item">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                    <div class="info-content">
+                        <div class="info-label">Email:</div>
+                        <div class="info-text">unathilayini@gmail.com</div>
+                    </div>
+                </div>
+    
+            </div>
+    
+     <!-- CONTACT FORM -->
+     <div class="contact-form">
+        <h2>Get a quote</h2>
+        <form id="quoteForm" action="https://formsubmit.co/businessemail@com" method="POST">
+    
+            <div class="form-group">
+                <input type="text" id="fullname" name="Full Name" placeholder="Full Name" required>
+            </div>
+    
+            <div class="form-group">
+                <input type="email" id="email" name="Email Address" placeholder="Email Address" required>
+            </div>
+    
+            <div class="form-group">
+                <input type="tel" id="phone" name="Phone Number" placeholder="Phone Number" required>
+            </div>
+    
+            <div class="form-group">
+                <label for="service">What type of service do you need?</label>
+                <select id="service" name="Service Needed" required>
+                    <option value="">Select a service...</option>
+                    <option value="thatching">Thatching (New Roof, Re-thatching, Maintenance)</option>
+                    <option value="lapas">Lapas &amp; Entertainment Areas</option>
+                    <option value="decking">Timber Decking</option>
+                    <option value="painting">Painting</option>
+                    <option value="roof-conversions">Roof Conversions</option>
+                    <option value="other">Other / Custom Project</option>
+                </select>
+            </div>
+    
+            <div class="form-group">
+                <textarea id="message" name="Message" placeholder="Tell us about your project: what you'd like done, where the property is, and any details about the roof or deck"></textarea>
+            </div>
+    
+            <input type="hidden" name="_subject" value="New Quote Request - Kei Cape Thatching &amp; Decking">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+    
+            <button type="submit" class="submit-btn">
+                Submit <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </form>
+    </div>
+    
+    <!-- ===== POPUP START (delete from here to POPUP END to remove the popup) ===== -->
+    <div class="popup" id="successPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
+        <div class="popup__box">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3 id="popupTitle">Quote request sent</h3>
+            <p>Thank you! We've received your details and will be in touch shortly to discuss your project.</p>
+            <button type="button" class="submit-btn" id="popupBtn">Done</button>
+        </div>
+    </div>
+    
+    <style>
+        .popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+        .popup[hidden] { display: none; }
+        .popup__box {
+            background: #fff;
+            max-width: 400px;
+            width: 100%;
+            margin: 0px auto;
+            padding: 32px 28px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .popup__box .fa-circle-check {
+            font-size: 3rem;
+             color: #2e9e5b;
+            margin-bottom: 12px;
+        }
+        .popup__box h3 { margin: 0 0 10px; }
+        .popup__box p { margin: 0 0 24px; line-height: 1.6; }
+        .popup__box .submit-btn {
+            display: inline-block;
+            text-decoration: none;
+        }
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: wait;
+        }
+    </style>
+    
+    <script>
+        const form = document.getElementById('quoteForm');
+        const popup = document.getElementById('successPopup');
+        const popupBtn = document.getElementById('popupBtn');
+    
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const sendBtn = form.querySelector('button[type="submit"]');
+            const btnHTML = sendBtn.innerHTML;
+    
+            // Instant feedback on click
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+    
+            try {
+                // Uses the email address from the form's own action
+                const res = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: new FormData(form)
+                });
+                const data = await res.json();
+    
+                if (String(data.success) === 'true') {
+                    form.reset();
+                    popup.hidden = false;
+                    popupBtn.focus();
+                } else {
+                    // Not activated yet (or any other problem): normal submit,
+                    // which shows FormSubmit's own page
+                    form.submit();
+                    return;
+                }
+            } catch (err) {
+                // Could not read the reply: fall back to the normal submit
+                form.submit();
+                return;
+            }
+    
+            sendBtn.disabled = false;
+            sendBtn.innerHTML = btnHTML;
+        });
+    
+        // The popup only closes when this button is pressed
+        popupBtn.addEventListener('click', () => { popup.hidden = true; });
+    </script>
+    <!-- ===== POPUP END ===== -->
+        <!-- ===== POPUP END ===== -->
+
+
+
+
+
+
+
+
+
+
+    
+        </div>
+    </div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script src="scripts.js"></script>
 
 </body>
