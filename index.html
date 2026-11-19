@@ -171,7 +171,7 @@
       color: #ffffff;
       background:
         linear-gradient(180deg, rgba(10, 14, 12, 0.72) 0%, rgba(10, 14, 12, 0.55) 50%, rgba(10, 14, 12, 0.85) 100%),
-        url("letcbg.webp") center / cover no-repeat,
+        url("assets/letc20.webp") center / cover no-repeat,
         #1e2224;
     }
 
@@ -309,7 +309,7 @@
         min-height: calc(100vh - 150px);
         background:
           linear-gradient(90deg, rgba(10, 14, 12, 0.9) 0%, rgba(10, 14, 12, 0.62) 50%, rgba(10, 14, 12, 0.2) 100%),
-          url("letcbg.webp") center / cover no-repeat,
+          url("assets/letc20.webp") center / cover no-repeat,
           #1e2224;
       }
       .hero h1 { max-width: 15ch; font-size: 3.25rem; }
@@ -377,10 +377,11 @@
     <section class="hero" id="home">
       <div class="wrap">
         <h1>Borehole Drilling & <span>Water Solutions</span></h1>
-        <p class="hero-text">
-          Affordable borehole drilling, pumps, solar pumping and home water purification
-          for homes, farms and businesses across Gauteng, North West and Mpumalanga.
-        </p>
+       
+<p class="hero-text" >
+  Affordable borehole drilling,pumps, solar pumping and water purification systems for homes and commercial properties across Gauteng, North West and Mpumalanga.
+</p>
+
         <div class="actions">
           <a href="contact.html" class="btn btn-main">
             Get A Quote
@@ -391,6 +392,417 @@
       </div>
     </section>
   </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <style>
+   
+      :focus-visible { outline: 3px solid #083855; outline-offset: 2px; }
+  
+      /* ================= MOBILE FIRST (compact) ================= */
+      .est { padding: 15px 12px 2px; }
+      .est-inner { max-width: 1100px; margin: 0 auto; }
+  
+      .est-head { margin-bottom: 14px; }
+      .kicker { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #0d4d88; }
+      .est-head h2 { margin: 2px 0 4px; font-size: 1.45rem; line-height: 1.15; color:rgb(12, 80, 132); }
+      .est-head p { margin: 0; font-size: 0.85rem; color: #4a5d70; }
+  
+      .est-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+      .panel, .field, .input { min-width: 0; }
+      html { -webkit-text-size-adjust: 100%; }
+      body { overflow-x: hidden; }
+  
+      .panel {
+        background: #ffffff;
+        border: 1px solid #dbe8f3;
+        border-radius: 5px;
+        padding: 14px;
+        box-shadow: 0 8px 24px rgba(13, 60, 141, 0.08);
+      }
+      .panel-title { margin: 0 0 12px; font-size: 0.95rem; font-weight: 700; }
+  
+      /* inputs */
+      .field-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 5px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        line-height: 1.15;
+      }
+      .ico {
+        flex: none;
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 8px;
+        background: #e3effa;
+        color: #0d4d88;
+        font-size: 0.7rem;
+      }
+      .rate { display: block; font-size: 0.7rem; font-weight: 500; color: #4a5d70; }
+      .rate b { color: #0d4d88; }
+  
+      .input {
+        display: flex;
+        align-items: center;
+        background: #f2f7fc;
+        border: 1.5px solid #cfe0ee;
+        border-radius: 11px;
+        padding: 0 11px;
+        cursor: text;
+        transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      }
+      .input:focus-within { background: #ffffff; border-color: #51a6db; box-shadow: 0 0 0 3px rgba(81, 166, 219, 0.25); }
+      .input input {
+        flex: 1;
+        min-width: 0;
+        border: 0;
+        background: transparent;
+        padding: 10px 0;
+        font: 700 1.05rem "Roboto", Arial, sans-serif;
+        color: #0d2a4d;
+        outline: none;
+        -moz-appearance: textfield;
+      }
+      .input input::placeholder { color: #a9bccd; font-weight: 500; }
+      .input input::-webkit-outer-spin-button,
+      .input input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+      .input span { font-size: 0.85rem; font-weight: 700; color: #4a5d70; }
+  
+      /* steel + PVC always side by side */
+      .pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-top: 12px; }
+  
+      /* casing bar */
+      .cover { margin-top: 14px; }
+      .cover-top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 5px; font-size: 0.72rem; font-weight: 500; color: #4a5d70; }
+      .cover-top b { color: #0d2a4d; }
+      .bar { display: flex; height: 8px; border-radius: 99px; overflow: hidden; background: #d5e3f0; }
+      .bar i { display: block; height: 100%; transition: width 0.3s ease; }
+      .b-steel { background: #0d3c8d; }
+      .b-pvc { background: #5bc0f8; }
+  
+      .hint {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin: 10px 0 0;
+        padding: 7px 10px;
+        border-radius: 9px;
+        background: #fff6e0;
+        color: #7a5200;
+        font-size: 0.75rem;
+        line-height: 1.3;
+      }
+      .hint[hidden] { display: none; }
+  
+      /* result */
+      .res {
+        color: #ffffff;
+        border: 0;
+        background: linear-gradient(180deg, rgb(13, 60, 141) 0%, rgba(7, 98, 147, 0.95) 100%);
+      }
+      .res-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.85; }
+      .res-total { margin: 2px 0 10px; font-size: clamp(2rem, 10vw, 2.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.02em; }
+  
+      .res ul { list-style: none; margin: 0 0 12px; padding: 8px 0 0; border-top: 1px solid rgba(255, 255, 255, 0.25); }
+      .res li { display: flex; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 0.8rem; color: rgba(255, 255, 255, 0.88); }
+      .res li b { color: #ffffff; white-space: nowrap; }
+      .res li span { min-width: 0; }
+  
+      .btns { display: grid; gap: 8px; }
+      .wa, .call {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 14px;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+      }
+      .wa { background: #25d366; color: #052e16; }
+      .wa i { font-size: 1.1rem; }
+      .wa:hover { background: #3ee07b; transform: translateY(-1px); }
+      .call { border: 1.5px solid rgba(255, 255, 255, 0.5); color: #ffffff; font-weight: 500; }
+      .call:hover { background: #ffffff; color: #0d3c8d; }
+  
+      .res-note { margin: 10px 0 0; font-size: 0.7rem; line-height: 1.35; opacity: 0.8; }
+  
+      /* ================= TABLET + DESKTOP: 2 COLUMNS ================= */
+      @media (min-width: 768px) {
+        .est { padding: 64px 32px 72px; }
+        .est-head { margin-bottom: 24px; }
+        .kicker { font-size: 0.78rem; }
+        .est-head h2 { font-size: 2.2rem; margin: 4px 0 8px; }
+        .est-head p { font-size: 1rem; }
+  
+        .est-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 24px; align-items: start; }
+        .panel { padding: 28px; border-radius: 22px; }
+        .panel-title { font-size: 1.05rem; margin-bottom: 18px; }
+  
+        .field-label { font-size: 0.95rem; gap: 10px; margin-bottom: 8px; }
+        .ico { width: 32px; height: 32px; font-size: 0.9rem; border-radius: 10px; }
+        .rate { font-size: 0.78rem; }
+        .input { border-radius: 14px; padding: 0 16px; }
+        .input input { padding: 14px 0; font-size: 1.3rem; }
+        .input span { font-size: 1rem; }
+        .pair { gap: 14px; margin-top: 18px; }
+  
+        .cover { margin-top: 20px; }
+        .cover-top { font-size: 0.8rem; }
+        .bar { height: 12px; }
+        .hint { font-size: 0.85rem; padding: 10px 12px; }
+  
+        .res { position: sticky; top: 24px; }
+        .res-label { font-size: 0.8rem; }
+        .res-total { font-size: 3.4rem; margin-bottom: 16px; }
+        .res ul { margin-bottom: 20px; padding-top: 12px; }
+        .res li { font-size: 0.92rem; padding: 6px 0; }
+        .wa, .call { padding: 15px 18px; font-size: 0.95rem; }
+        .res-note { font-size: 0.8rem; margin-top: 16px; }
+      }
+      @media (min-width: 992px) {
+        .est { padding: 90px 40px 100px; }
+        .est-grid { gap: 32px; }
+        .panel { padding: 36px; }
+      }
+  
+      /* very small phones */
+      @media (max-width: 480px) {
+        .pair .ico { display: none; }
+        .input span { font-size: 0.8rem; }
+      }
+      @media (max-width: 340px) {
+        .est { padding: 18px 8px 22px; }
+        .panel { padding: 12px; }
+        .pair { gap: 8px; }
+        .input { padding: 0 9px; }
+        .input input { font-size: 1rem; }
+      }
+      @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    </style>
+
+  
+    <section class="est" id="estimate">
+      <div class="est-inner">
+  
+        <header class="est-head">
+          <span class="kicker"></span>
+          <h2>Estimate your borehole cost</h2>
+          <p>Type your numbers and the estimate updates instantly.</p>
+        </header>
+  
+        <div class="est-grid">
+  
+          <!-- LEFT: your numbers -->
+          <div class="panel">
+            <h3 class="panel-title">Your borehole</h3>
+  
+            <div class="field">
+              <label class="field-label" for="depth">
+                <span class="ico"><i class="fa-solid fa-arrow-down-long"></i></span>
+                <span>Drilling depth <span class="rate"><b data-rate="drill"></b> per metre</span></span>
+              </label>
+              <div class="input"><input id="depth" type="number" inputmode="numeric" enterkeyhint="next" min="0" placeholder="e.g. 40" value="40"><span>m</span></div>
+            </div>
+  
+            <div class="pair">
+              <div class="field">
+                <label class="field-label" for="steel">
+                  <span class="ico"><i class="fa-solid fa-shield-halved"></i></span>
+                  <span>Steel casing <span class="rate"><b data-rate="steel"></b> per metre</span></span>
+                </label>
+                <div class="input"><input id="steel" type="number" inputmode="numeric" enterkeyhint="next" min="0" placeholder="e.g. 6" value="6"><span>m</span></div>
+              </div>
+  
+              <div class="field">
+                <label class="field-label" for="pvc">
+                  <span class="ico"><i class="fa-solid fa-droplet"></i></span>
+                  <span>PVC casing <span class="rate"><b data-rate="pvc"></b> per metre</span></span>
+                </label>
+                <div class="input"><input id="pvc" type="number" inputmode="numeric" enterkeyhint="done" min="0" placeholder="e.g. 0" value="0"><span>m</span></div>
+              </div>
+            </div>
+  
+            <div class="cover">
+              <div class="cover-top"><span>Casing in your borehole</span><b id="coverTxt"></b></div>
+              <div class="bar" aria-hidden="true"><i class="b-steel" id="barSteel"></i><i class="b-pvc" id="barPvc"></i></div>
+            </div>
+  
+            <p class="hint" id="hint" hidden><i class="fa-solid fa-circle-info"></i> Casing can't be longer than the drilling depth, so we adjusted it.</p>
+          </div>
+  
+          <!-- RIGHT: your estimate -->
+          <div class="panel res" aria-live="polite">
+            <div class="res-label">Estimated total</div>
+            <div class="res-total" id="total">R0</div>
+            <ul id="list"></ul>
+  
+            <div class="btns">
+              <a class="wa" id="wa" href="https://wa.me/27783782121" target="_blank" rel="noopener">
+                <i class="fa-brands fa-whatsapp"></i> Send this on WhatsApp
+              </a>
+              <a class="call" href="tel:+27783782121"><i class="fa-solid fa-phone"></i> Or call 078 378 2121</a>
+            </div>
+  
+            <p class="res-note">Drilling and casing only. The final price depends on your site and ground conditions, and we confirm it in your quote.</p>
+          </div>
+  
+        </div>
+      </div>
+    </section>
+  
+    <script>
+      (function () {
+        // >>> Edit prices here (Rand per metre). Every price on the page updates. <<<
+        const RATE = { drill: 350, steel: 600, pvc: 150 };
+        const WA = '27783782121';
+  
+        const $ = (id) => document.getElementById(id);
+        const depthEl = $('depth'), steelEl = $('steel'), pvcEl = $('pvc');
+        const totalEl = $('total'), listEl = $('list'), waEl = $('wa'), hintEl = $('hint');
+        const barSteel = $('barSteel'), barPvc = $('barPvc'), coverTxt = $('coverTxt');
+  
+        const money = (n) => 'R' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+        const num = (el) => { const n = parseInt(el.value, 10); return isNaN(n) ? 0 : Math.max(0, n); };
+  
+        document.querySelectorAll('[data-rate]').forEach((el) => { el.textContent = money(RATE[el.dataset.rate]); });
+  
+        function update() {
+          const d = num(depthEl);
+          let s = num(steelEl), p = num(pvcEl);
+  
+          // casing can't be longer than the borehole
+          let limited = false;
+          if (s > d) { s = d; limited = true; }
+          if (p > d) { p = d; limited = true; }
+          if (s + p > d) { p = d - s; limited = true; }
+          hintEl.hidden = !limited;
+  
+          // casing bar
+          barSteel.style.width = d ? (s / d * 100) + '%' : '0';
+          barPvc.style.width = d ? (p / d * 100) + '%' : '0';
+          coverTxt.textContent = (s + p) + ' m cased · ' + (d - s - p) + ' m open';
+  
+          const rows = [['Drilling', d, RATE.drill]];
+          if (s) rows.push(['Steel casing', s, RATE.steel]);
+          if (p) rows.push(['PVC casing', p, RATE.pvc]);
+  
+          const total = d * RATE.drill + s * RATE.steel + p * RATE.pvc;
+          totalEl.textContent = money(total);
+          listEl.innerHTML = rows.map((r) =>
+            '<li><span>' + r[0] + ' · ' + r[1] + ' m × ' + money(r[2]) + '</span><b>' + money(r[1] * r[2]) + '</b></li>'
+          ).join('');
+  
+          const lines = ['Hi Letco Water Solutions, I would like a quote for a borehole.', '', 'Drilling depth: ' + d + ' m'];
+          if (s) lines.push('Steel casing: ' + s + ' m');
+          if (p) lines.push('PVC casing: ' + p + ' m');
+          lines.push('Estimate: ' + money(total).replace(/\u00a0/g, ' '), '', 'Please confirm the final price.');
+          waEl.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(lines.join('\n'));
+        }
+  
+        // typing updates live; select on focus so typing replaces the old number
+        [depthEl, steelEl, pvcEl].forEach((el) => {
+          el.addEventListener('input', update);
+          el.addEventListener('focus', () => el.select());
+          el.addEventListener('blur', () => { if (el.value !== '') { el.value = num(el); update(); } });
+        });
+  
+        // Enter moves to the next field, and closes the keyboard on the last one
+        const order = [depthEl, steelEl, pvcEl];
+        order.forEach((el, i) => el.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter') return;
+          e.preventDefault();
+          if (order[i + 1]) order[i + 1].focus(); else el.blur();
+        }));
+  
+        // tapping anywhere in a box focuses the field
+        document.querySelectorAll('.input').forEach((box) =>
+          box.addEventListener('click', () => box.querySelector('input').focus())
+        );
+  
+        update();
+      })();
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   <style>
