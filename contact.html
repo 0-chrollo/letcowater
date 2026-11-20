@@ -719,6 +719,10 @@
                     </div>
 
                     <div class="form-group">
+                        <input type="text" id="location" name="Location" placeholder="Location (Town, Suburb or Area)" required>
+                    </div>
+
+                    <div class="form-group">
                         <label for="service">What type of service do you need?</label>
                         <select id="service" name="Service Needed" required>
                             <option value="">Select a service...</option>
@@ -800,14 +804,16 @@
         const popup = document.getElementById('successPopup');
         const popupBtn = document.getElementById('popupBtn');
         const ajaxUrl = form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+        const SPINNER_MS = 2000;
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            const sendBtn = form.querySelector('button[type="submit"]');
+            const btnHTML = sendBtn.innerHTML;
             const payload = new FormData(form);
 
-            form.reset();
-            popup.hidden = false;
-            popupBtn.focus();
+            sendBtn.disabled = true;
+            sendBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
 
             fetch(ajaxUrl, {
                 method: 'POST',
@@ -815,6 +821,14 @@
                 body: payload,
                 keepalive: true
             }).catch(() => {});
+
+            setTimeout(() => {
+                form.reset();
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = btnHTML;
+                popup.hidden = false;
+                popupBtn.focus();
+            }, SPINNER_MS);
         });
 
         popupBtn.addEventListener('click', () => {
