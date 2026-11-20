@@ -706,7 +706,7 @@
      <!-- CONTACT FORMM -->
      <div class="contact-form">
       <h2>Get a quote</h2>
-      <form id="quoteForm" action="https://formsubmit.co/info@letcowater.co.za" method="POST">
+      <form id="quoteForm" action="https://formsubmit.co/info@lectowater.co.za" method="POST">
   
           <div class="form-group">
               <input type="text" id="fullname" name="Full Name" placeholder="Full Name" required>
@@ -743,15 +743,15 @@
           <input type="hidden" name="_subject" value="New Quote Request - Letco Water Solutions">
           <input type="hidden" name="_template" value="table">
           <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" id="nextUrl" name="_next" value="">
   
           <button type="submit" class="submit-btn">
               Submit <i class="fa-solid fa-paper-plane"></i>
           </button>
-          <p id="formMsg" class="form-msg" role="alert" hidden></p>
       </form>
   </div>
   
-  <!-- ===== POPUP START (delete from here to POPUP END to remove the popup) ===== -->
+  <!-- ===== POPUP START ===== -->
   <div class="popup" id="successPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
       <div class="popup__box">
           <i class="fa-solid fa-circle-check"></i>
@@ -777,7 +777,7 @@
           background: #fff;
           max-width: 400px;
           width: 100%;
-          margin: 0px auto;
+          margin: 0 auto;
           padding: 32px 28px;
           border-radius: 12px;
           text-align: center;
@@ -793,156 +793,28 @@
           display: inline-block;
           text-decoration: none;
       }
-      .submit-btn:disabled {
-          opacity: 0.7;
-          cursor: wait;
-      }
-      .form-msg {
-          margin-top: 10px;
-          color: #b91c1c;
-          font-size: 0.92rem;
-      }
-      .form-msg[hidden] { display: none; }
   </style>
   
   <script>
-  (() => {
-      const form = document.getElementById('quoteForm');
+      const nextInput = document.getElementById('nextUrl');
       const popup = document.getElementById('successPopup');
       const popupBtn = document.getElementById('popupBtn');
-      const formMsg = document.getElementById('formMsg');
-      const GIVE_UP_AFTER = 15000;
   
-      if (!form || !popup || !popupBtn) return;
+      const baseUrl = window.location.href.split('#')[0].split('?')[0];
+      nextInput.value = `${baseUrl}?sent=1`;
   
-      const getActionUrl = () => form.getAttribute('action').trim();
-      const getAjaxUrl = () =>
-          getActionUrl().replace(/^https?:\/\/(www\.)?formsubmit\.co\//i, 'https://formsubmit.co/ajax/');
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('sent') === '1') {
+          popup.hidden = false;
+          popupBtn.focus();
+          window.history.replaceState({}, '', baseUrl);
+      }
   
-      const storageKey = () => `formsubmit_activated:${getActionUrl().toLowerCase()}`;
-  
-      const isActivated = () => {
-          try {
-              return localStorage.getItem(storageKey()) === '1';
-          } catch {
-              return false;
-          }
-      };
-  
-      const setActivated = (value) => {
-          try {
-              if (value) {
-                  localStorage.setItem(storageKey(), '1');
-              } else {
-                  localStorage.removeItem(storageKey());
-              }
-          } catch {
-              // Ignore storage errors in restricted browser modes
-          }
-      };
-  
-      const showError = (msg) => {
-          if (!formMsg) return;
-          formMsg.textContent = msg;
-          formMsg.hidden = false;
-      };
-  
-      const clearError = () => {
-          if (!formMsg) return;
-          formMsg.textContent = '';
-          formMsg.hidden = true;
-      };
-  
-      const setLoadingState = (sendBtn, isLoading, loadingHtml, originalHtml) => {
-          if (!sendBtn) return;
-          sendBtn.disabled = isLoading;
-          sendBtn.innerHTML = isLoading ? loadingHtml : originalHtml;
-      };
-  
-      form.addEventListener('submit', async (e) => {
-          const sendBtn = form.querySelector('button[type="submit"]');
-          const btnHTML = sendBtn ? sendBtn.innerHTML : 'Submit';
-  
-          clearError();
-  
-          // First submission on this browser: let the browser do a normal POST so
-          // FormSubmit triggers the activation email and shows its verification screen.
-          if (!isActivated()) {
-              setActivated(true);
-              setLoadingState(
-                  sendBtn,
-                  true,
-                  'Redirecting... <i class="fa-solid fa-spinner fa-spin"></i>',
-                  btnHTML
-              );
-              return;
-          }
-  
-          // Subsequent submissions: send via AJAX for fast delivery + popup
-          e.preventDefault();
-          setLoadingState(
-              sendBtn,
-              true,
-              'Sending... <i class="fa-solid fa-spinner fa-spin"></i>',
-              btnHTML
-          );
-  
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), GIVE_UP_AFTER);
-  
-          try {
-              const res = await fetch(getAjaxUrl(), {
-                  method: 'POST',
-                  headers: { 'Accept': 'application/json' },
-                  body: new FormData(form),
-                  signal: controller.signal
-              });
-  
-              const data = await res.json().catch(() => ({}));
-              const statusText = String(data.message || '').toLowerCase();
-  
-              // If FormSubmit still requires activation, fall back to normal POST
-              if (statusText.includes('activate') || statusText.includes('confirm')) {
-                  setActivated(false);
-                  form.submit();
-                  return;
-              }
-  
-              if (res.ok && (data.success === true || String(data.success) === 'true')) {
-                  form.reset();
-                  popup.hidden = false;
-                  popupBtn.focus();
-              } else {
-                  form.submit();
-                  return;
-              }
-          } catch (err) {
-              if (err && err.name === 'AbortError') {
-                  showError('This is taking too long. Please try again, or WhatsApp us on 078 378 2121.');
-                  setLoadingState(sendBtn, false, '', btnHTML);
-              } else {
-                  form.submit();
-                  return;
-              }
-          } finally {
-              clearTimeout(timeoutId);
-          }
-  
-          if (!popup.hidden || (formMsg && formMsg.hidden)) {
-              setLoadingState(sendBtn, false, '', btnHTML);
-          }
-      });
-  
-      // The popup only closes when this button is pressed
       popupBtn.addEventListener('click', () => {
           popup.hidden = true;
       });
-  })();
   </script>
   <!-- ===== POPUP END ===== -->
-
-
-
 
 
 
