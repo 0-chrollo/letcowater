@@ -803,51 +803,63 @@
     </style>
     
     <script>
-        const form = document.getElementById('quoteForm');
-        const popup = document.getElementById('successPopup');
-        const popupBtn = document.getElementById('popupBtn');
-    
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const sendBtn = form.querySelector('button[type="submit"]');
-            const btnHTML = sendBtn.innerHTML;
-    
-            // Instant feedback on click
-            sendBtn.disabled = true;
-            sendBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
-    
-            try {
-                // Uses the email address from the form's own action
-                const res = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
-                    method: 'POST',
-                    headers: { 'Accept': 'application/json' },
-                    body: new FormData(form)
-                });
-                const data = await res.json();
-    
-                if (String(data.success) === 'true') {
-                    form.reset();
-                    popup.hidden = false;
-                    popupBtn.focus();
-                } else {
-                    // Not activated yet (or any other problem): normal submit,
-                    // which shows FormSubmit's own page
-                    form.submit();
-                    return;
-                }
-            } catch (err) {
-                // Could not read the reply: fall back to the normal submit
-                form.submit();
-                return;
-            }
-    
-            sendBtn.disabled = false;
-            sendBtn.innerHTML = btnHTML;
-        });
-    
-        // The popup only closes when this button is pressed
-        popupBtn.addEventListener('click', () => { popup.hidden = true; });
-    </script>
+      const form = document.getElementById('quoteForm');
+      const popup = document.getElementById('successPopup');
+      const popupBtn = document.getElementById('popupBtn');
+      const formMsg = document.getElementById('formMsg');
+      const GIVE_UP_AFTER = 15000;   // CHANGE: milliseconds to wait before giving up (15000 = 15 seconds)
+  
+      form.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const sendBtn = form.querySelector('button[type="submit"]');
+          const btnHTML = sendBtn.innerHTML;
+  
+          formMsg.hidden = true;
+          sendBtn.disabled = true;
+          sendBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+  
+          const controller = new AbortController();
+          const timer = setTimeout(() => controller.abort(), GIVE_UP_AFTER);
+  
+          try {
+              const res = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+                  method: 'POST',
+                  headers: { 'Accept': 'application/json' },
+                  body: new FormData(form),
+                  signal: controller.signal
+              });
+              const data = await res.json();
+  
+              if (String(data.success) === 'true') {
+                  form.reset();
+                  popup.hidden = false;
+                  popupBtn.focus();
+              } else {
+                  // Not activated yet (or any other problem): normal submit,
+                  // which shows FormSubmit's own page
+                  form.submit();
+                  return;
+              }
+          } catch (err) {
+              if (err.name === 'AbortError') {
+                  formMsg.textContent = 'This is taking too long. Please try again, or WhatsApp us on 078 378 2121.';
+                  formMsg.hidden = false;
+              } else {
+                  // Could not read the reply: fall back to the normal submit
+                  form.submit();
+                  return;
+              }
+          } finally {
+              clearTimeout(timer);
+          }
+  
+          sendBtn.disabled = false;
+          sendBtn.innerHTML = btnHTML;
+      });
+  
+      // The popup only closes when this button is pressed
+      popupBtn.addEventListener('click', () => { popup.hidden = true; });
+  </script>
     <!-- ===== POPUP END ===== -->
         <!-- ===== POPUP END ===== -->
 
