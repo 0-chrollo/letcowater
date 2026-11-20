@@ -705,165 +705,241 @@
     
      <!-- CONTACT FORM -->
      <div class="contact-form">
-        <h2>Get a quote</h2>
-        <form id="quoteForm" action="https://formsubmit.co/info@lectowater.co.za" method="POST">
-    
-            <div class="form-group">
-                <input type="text" id="fullname" name="Full Name" placeholder="Full Name" required>
-            </div>
-    
-            <div class="form-group">
-                <input type="email" id="email" name="Email Address" placeholder="Email Address" required>
-            </div>
-    
-            <div class="form-group">
-                <input type="tel" id="phone" name="Phone Number" placeholder="Phone Number" required>
-            </div>
-    
-            <div class="form-group">
-                <label for="service">What type of service do you need?</label>
-                <select id="service" name="Service Needed" required>
-                    <option value="">Select a service...</option>
-                    <option value="borehole-drilling">Borehole Drilling</option>
-                    <option value="geological-assessment">3D Geological Assessment</option>
-                    <option value="borehole-pumps">Borehole Pumps (Supply and Installation)</option>
-                    <option value="solar-pumping">Solar Borehole Pumping Systems</option>
-                    <option value="backup-water">Backup Water Systems</option>
-                    <option value="storage-plumbing">Water Storage and Plumbing</option>
-                    <option value="irrigation">Irrigation</option>
-                    <option value="water-purification">Home Water Purification</option>
-                    <option value="other">Other / General Enquiry</option>
-                </select>
-            </div>
-    
-            <div class="form-group">
-                <textarea id="message" name="Message" placeholder="Tell us about your project: what you need done, where the property is, and whether it is a home, farm or business"></textarea>
-            </div>
-    
-            <input type="hidden" name="_subject" value="New Quote Request - Letco Water Solutions">
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-    
-            <button type="submit" class="submit-btn">
-                Submit <i class="fa-solid fa-paper-plane"></i>
-            </button>
-        </form>
-    </div>
-    
-    <!-- ===== POPUP START (delete from here to POPUP END to remove the popup) ===== -->
-    <div class="popup" id="successPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
-        <div class="popup__box">
-            <i class="fa-solid fa-circle-check"></i>
-            <h3 id="popupTitle">Quote request sent</h3>
-            <p>Thank you! We've received your details and will be in touch shortly to discuss your project.</p>
-            <button type="button" class="submit-btn" id="popupBtn">Done</button>
-        </div>
-    </div>
-
-
-
-
-    
-    <style>
-        .popup {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            z-index: 9999;
-        }
-        .popup[hidden] { display: none; }
-        .popup__box {
-            background: #fff;
-            max-width: 400px;
-            width: 100%;
-            margin: 0px auto;
-            padding: 32px 28px;
-            border-radius: 12px;
-            text-align: center;
-        }
-        .popup__box .fa-circle-check {
-            font-size: 3rem;
-             color: #2e9e5b;
-            margin-bottom: 12px;
-        }
-        .popup__box h3 { margin: 0 0 10px; }
-        .popup__box p { margin: 0 0 24px; line-height: 1.6; }
-        .popup__box .submit-btn {
-            display: inline-block;
-            text-decoration: none;
-        }
-        .submit-btn:disabled {
-            opacity: 0.7;
-            cursor: wait;
-        }
-    </style>
-    
-    <script>
+      <h2>Get a quote</h2>
+      <form id="quoteForm" action="https://formsubmit.co/info@lectowater.co.za" method="POST">
+  
+          <div class="form-group">
+              <input type="text" id="fullname" name="Full Name" placeholder="Full Name" required>
+          </div>
+  
+          <div class="form-group">
+              <input type="email" id="email" name="Email Address" placeholder="Email Address" required>
+          </div>
+  
+          <div class="form-group">
+              <input type="tel" id="phone" name="Phone Number" placeholder="Phone Number" required>
+          </div>
+  
+          <div class="form-group">
+              <label for="service">What type of service do you need?</label>
+              <select id="service" name="Service Needed" required>
+                  <option value="">Select a service...</option>
+                  <option value="borehole-drilling">Borehole Drilling</option>
+                  <option value="geological-assessment">3D Geological Assessment</option>
+                  <option value="borehole-pumps">Borehole Pumps (Supply and Installation)</option>
+                  <option value="solar-pumping">Solar Borehole Pumping Systems</option>
+                  <option value="backup-water">Backup Water Systems</option>
+                  <option value="storage-plumbing">Water Storage and Plumbing</option>
+                  <option value="irrigation">Irrigation</option>
+                  <option value="water-purification">Home Water Purification</option>
+                  <option value="other">Other / General Enquiry</option>
+              </select>
+          </div>
+  
+          <div class="form-group">
+              <textarea id="message" name="Message" placeholder="Tell us about your project: what you need done, where the property is, and whether it is a home, farm or business"></textarea>
+          </div>
+  
+          <input type="hidden" name="_subject" value="New Quote Request - Letco Water Solutions">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+  
+          <button type="submit" class="submit-btn">
+              Submit <i class="fa-solid fa-paper-plane"></i>
+          </button>
+          <p id="formMsg" class="form-msg" role="alert" hidden></p>
+      </form>
+  </div>
+  
+  <!-- ===== POPUP START (delete from here to POPUP END to remove the popup) ===== -->
+  <div class="popup" id="successPopup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" hidden>
+      <div class="popup__box">
+          <i class="fa-solid fa-circle-check"></i>
+          <h3 id="popupTitle">Quote request sent</h3>
+          <p>Thank you! We've received your details and will be in touch shortly to discuss your project.</p>
+          <button type="button" class="submit-btn" id="popupBtn">Done</button>
+      </div>
+  </div>
+  
+  <style>
+      .popup {
+          position: fixed;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.6);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          z-index: 9999;
+      }
+      .popup[hidden] { display: none; }
+      .popup__box {
+          background: #fff;
+          max-width: 400px;
+          width: 100%;
+          margin: 0px auto;
+          padding: 32px 28px;
+          border-radius: 12px;
+          text-align: center;
+      }
+      .popup__box .fa-circle-check {
+          font-size: 3rem;
+          color: #2e9e5b;
+          margin-bottom: 12px;
+      }
+      .popup__box h3 { margin: 0 0 10px; }
+      .popup__box p { margin: 0 0 24px; line-height: 1.6; }
+      .popup__box .submit-btn {
+          display: inline-block;
+          text-decoration: none;
+      }
+      .submit-btn:disabled {
+          opacity: 0.7;
+          cursor: wait;
+      }
+      .form-msg {
+          margin-top: 10px;
+          color: #b91c1c;
+          font-size: 0.92rem;
+      }
+      .form-msg[hidden] { display: none; }
+  </style>
+  
+  <script>
+  (() => {
       const form = document.getElementById('quoteForm');
       const popup = document.getElementById('successPopup');
       const popupBtn = document.getElementById('popupBtn');
       const formMsg = document.getElementById('formMsg');
-      const GIVE_UP_AFTER = 15000;   // CHANGE: milliseconds to wait before giving up (15000 = 15 seconds)
+      const GIVE_UP_AFTER = 15000;
+  
+      if (!form || !popup || !popupBtn) return;
+  
+      const getActionUrl = () => form.getAttribute('action').trim();
+      const getAjaxUrl = () =>
+          getActionUrl().replace(/^https?:\/\/(www\.)?formsubmit\.co\//i, 'https://formsubmit.co/ajax/');
+  
+      const storageKey = () => `formsubmit_activated:${getActionUrl().toLowerCase()}`;
+  
+      const isActivated = () => {
+          try {
+              return localStorage.getItem(storageKey()) === '1';
+          } catch {
+              return false;
+          }
+      };
+  
+      const setActivated = (value) => {
+          try {
+              if (value) {
+                  localStorage.setItem(storageKey(), '1');
+              } else {
+                  localStorage.removeItem(storageKey());
+              }
+          } catch {
+              // Ignore storage errors in restricted browser modes
+          }
+      };
+  
+      const showError = (msg) => {
+          if (!formMsg) return;
+          formMsg.textContent = msg;
+          formMsg.hidden = false;
+      };
+  
+      const clearError = () => {
+          if (!formMsg) return;
+          formMsg.textContent = '';
+          formMsg.hidden = true;
+      };
+  
+      const setLoadingState = (sendBtn, isLoading, loadingHtml, originalHtml) => {
+          if (!sendBtn) return;
+          sendBtn.disabled = isLoading;
+          sendBtn.innerHTML = isLoading ? loadingHtml : originalHtml;
+      };
   
       form.addEventListener('submit', async (e) => {
-          e.preventDefault();
           const sendBtn = form.querySelector('button[type="submit"]');
-          const btnHTML = sendBtn.innerHTML;
+          const btnHTML = sendBtn ? sendBtn.innerHTML : 'Submit';
   
-          formMsg.hidden = true;
-          sendBtn.disabled = true;
-          sendBtn.innerHTML = 'Sending... <i class="fa-solid fa-spinner fa-spin"></i>';
+          clearError();
+  
+          // First submission on this browser: let the browser do a normal POST so
+          // FormSubmit triggers the activation email and shows its verification screen.
+          if (!isActivated()) {
+              setActivated(true);
+              setLoadingState(
+                  sendBtn,
+                  true,
+                  'Redirecting... <i class="fa-solid fa-spinner fa-spin"></i>',
+                  btnHTML
+              );
+              return;
+          }
+  
+          // Subsequent submissions: send via AJAX for fast delivery + popup
+          e.preventDefault();
+          setLoadingState(
+              sendBtn,
+              true,
+              'Sending... <i class="fa-solid fa-spinner fa-spin"></i>',
+              btnHTML
+          );
   
           const controller = new AbortController();
-          const timer = setTimeout(() => controller.abort(), GIVE_UP_AFTER);
+          const timeoutId = setTimeout(() => controller.abort(), GIVE_UP_AFTER);
   
           try {
-              const res = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+              const res = await fetch(getAjaxUrl(), {
                   method: 'POST',
                   headers: { 'Accept': 'application/json' },
                   body: new FormData(form),
                   signal: controller.signal
               });
-              const data = await res.json();
   
-              if (String(data.success) === 'true') {
+              const data = await res.json().catch(() => ({}));
+              const statusText = String(data.message || '').toLowerCase();
+  
+              // If FormSubmit still requires activation, fall back to normal POST
+              if (statusText.includes('activate') || statusText.includes('confirm')) {
+                  setActivated(false);
+                  form.submit();
+                  return;
+              }
+  
+              if (res.ok && (data.success === true || String(data.success) === 'true')) {
                   form.reset();
                   popup.hidden = false;
                   popupBtn.focus();
               } else {
-                  // Not activated yet (or any other problem): normal submit,
-                  // which shows FormSubmit's own page
                   form.submit();
                   return;
               }
           } catch (err) {
-              if (err.name === 'AbortError') {
-                  formMsg.textContent = 'This is taking too long. Please try again, or WhatsApp us on 078 378 2121.';
-                  formMsg.hidden = false;
+              if (err && err.name === 'AbortError') {
+                  showError('This is taking too long. Please try again, or WhatsApp us on 078 378 2121.');
+                  setLoadingState(sendBtn, false, '', btnHTML);
               } else {
-                  // Could not read the reply: fall back to the normal submit
                   form.submit();
                   return;
               }
           } finally {
-              clearTimeout(timer);
+              clearTimeout(timeoutId);
           }
   
-          sendBtn.disabled = false;
-          sendBtn.innerHTML = btnHTML;
+          if (!popup.hidden || (formMsg && formMsg.hidden)) {
+              setLoadingState(sendBtn, false, '', btnHTML);
+          }
       });
   
       // The popup only closes when this button is pressed
-      popupBtn.addEventListener('click', () => { popup.hidden = true; });
+      popupBtn.addEventListener('click', () => {
+          popup.hidden = true;
+      });
+  })();
   </script>
-    <!-- ===== POPUP END ===== -->
-        <!-- ===== POPUP END ===== -->
-
-
+  <!-- ===== POPUP END ===== -->
 
 
 
